@@ -61,7 +61,7 @@ public class MilkCauldron extends Block{
 					break;
 				case 3:
 					lev.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
-					Block.popResource(lev, pos, new ItemStack(ItemInit.CHEESE.get()));
+					Block.popResource(lev, pos, new ItemStack(ItemInit.CHEESE));
 				}
 				return InteractionResult.CONSUME;
 			} else {

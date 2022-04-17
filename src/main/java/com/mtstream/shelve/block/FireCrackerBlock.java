@@ -80,7 +80,7 @@ public class FireCrackerBlock extends Block{
 	@Override
 	public void neighborChanged(BlockState state, Level lev, BlockPos pos, Block blo,
 			BlockPos pos1, boolean bln) {
-		if(lev.getBlockState(pos.below()).getBlock().equals(BlockInit.FIRECRACKER.get()) && !state.getValue(LIT)) {
+		if(lev.getBlockState(pos.below()).getBlock().equals(BlockInit.FIRECRACKER) && !state.getValue(LIT)) {
 			if(lev.getBlockState(pos.below()).getValue(FireCrackerBlock.LIT) && !lev.isClientSide) {
 				light(lev, pos, state);
 			}

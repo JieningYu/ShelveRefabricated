@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.mtstream.shelve.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ItemStackMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

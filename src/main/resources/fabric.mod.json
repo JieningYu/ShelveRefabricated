@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "shelve",
+  "version": "${version}",
+
+  "name": "Shelve Refabricated",
+  "description": "nice thingy",
+  "authors": [
+    "Mssstream"
+  ],
+
+  "license": "MIT",
+  "icon": "assets/shelve/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.mtstream.shelve.Shelve"
+    ],
+    "client": [
+      "com.mtstream.shelve.ShelveClient"
+    ]
+  },
+  "mixins": [
+    "shelve.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}

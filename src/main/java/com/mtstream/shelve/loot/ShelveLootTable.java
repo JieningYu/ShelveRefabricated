@@ -19,7 +19,7 @@ public class ShelveLootTable {
 	private static final Set<ResourceLocation> LOC_ = Collections.unmodifiableSet(LOC);
 	
 	public static ResourceLocation register(String string) {
-		return register(new ResourceLocation(Shelve.MOD_ID,string));
+		return register(new ResourceLocation(Shelve.MOD_ID, string));
 	}
 	public static ResourceLocation register(ResourceLocation location) {
 		return location;

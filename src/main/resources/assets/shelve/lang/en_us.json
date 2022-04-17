@@ -10,7 +10,7 @@
 	"block.shelve.instant_tnt":"INT",
 	
 	"block.shelve.humidity_detector":"Humidity Detector",
-	"block.shelve.static_detector":"Static detector",
+	"block.shelve.static_detector":"Static Detector",
 	
 	"item.shelve.turf":"Turf",
 	
@@ -18,7 +18,7 @@
 	"item.shelve.mysterious_box":"Mysterious Box",
 	"item.shelve.infernal_box":"Infernal Box",
 	"item.shelve.marine_box":"Marine Box",
-	"item.shelve.handheld_dispenser":"Handheld_dispenser",
+	"item.shelve.handheld_dispenser":"Handheld Dispenser",
 	"item.shelve.cheese":"Cheese",
 	"item.shelve.marinide_ingot":"Marinide Ingot",
 	"item.shelve.amethyst_ball":"Amethyst Ball",

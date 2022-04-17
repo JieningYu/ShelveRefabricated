@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class HumidityDetectorBlockEntity extends BlockEntity{
 
 	public HumidityDetectorBlockEntity(BlockPos pos, BlockState state) {
-		super(BlockEntityInit.HUMIDITY_DETECTOR.get(), pos, state);
+		super(BlockEntityInit.HUMIDITY_DETECTOR, pos, state);
 	}
 
 }

@@ -56,7 +56,7 @@ public class StaticDetectorBlock extends BaseEntityBlock{
 	}
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return BlockEntityInit.STATIC_DETECTOR.get().create(pos, state);
+		return BlockEntityInit.STATIC_DETECTOR.create(pos, state);
 	}
 	@Override
 	public int getSignal(BlockState state, BlockGetter get, BlockPos pos, Direction dir) {
@@ -77,7 +77,7 @@ public class StaticDetectorBlock extends BaseEntityBlock{
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level lev, BlockState state,BlockEntityType<T> type) {
-		return lev.isClientSide ? null : createTickerHelper(type, BlockEntityInit.STATIC_DETECTOR.get(), StaticDetectorBlock::tickEntity);
+		return lev.isClientSide ? null : createTickerHelper(type, BlockEntityInit.STATIC_DETECTOR, StaticDetectorBlock::tickEntity);
 	}
 	public static void tickEntity(Level lev,BlockPos pos,BlockState state,StaticDetectorBlockEntity entity) {
 		if(lev.getGameTime()%20L == 0L) {

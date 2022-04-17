@@ -61,7 +61,7 @@ public class HumidityDetectorBlock extends BaseEntityBlock{
 	}
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return BlockEntityInit.HUMIDITY_DETECTOR.get().create(pos, state);
+		return BlockEntityInit.HUMIDITY_DETECTOR.create(pos, state);
 	}
 	@Override
 	public int getSignal(BlockState state, BlockGetter getter, BlockPos pos, Direction dir) {
@@ -113,7 +113,7 @@ public class HumidityDetectorBlock extends BaseEntityBlock{
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level lev, BlockState state, BlockEntityType<T> type) { 
-		return lev.isClientSide ? null : createTickerHelper(type, BlockEntityInit.HUMIDITY_DETECTOR.get(), HumidityDetectorBlock::tickEntity);
+		return lev.isClientSide ? null : createTickerHelper(type, BlockEntityInit.HUMIDITY_DETECTOR, HumidityDetectorBlock::tickEntity);
 	}
 	public static void tickEntity(Level lev,BlockPos pos,BlockState state,HumidityDetectorBlockEntity entity) {
 		if(lev.getGameTime()%20L == 0L) {

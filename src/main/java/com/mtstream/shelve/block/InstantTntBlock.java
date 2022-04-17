@@ -14,14 +14,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 public class InstantTntBlock extends TntBlock{
-
 	public InstantTntBlock(Properties prop) {
 		super(prop);
 	}
+	/*
 	@Override
 	public void onCaughtFire(BlockState state, Level world, BlockPos pos, Direction face, LivingEntity igniter) {
 		explode(world, pos, igniter);
 	}
+	 */
 	public static void explode(Level lev,BlockPos pos,@Nullable LivingEntity ign) {
 		PrimedTnt tnt = new PrimedTnt(lev, pos.getX(), pos.getY(), pos.getZ(), ign);
 		tnt.setFuse(0);
