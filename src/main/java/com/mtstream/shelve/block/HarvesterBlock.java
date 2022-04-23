@@ -44,19 +44,13 @@ public class HarvesterBlock extends Block{
 	@Override
 	public VoxelShape getShape(BlockState state, @NotNull BlockGetter get, @NotNull BlockPos pos,
 							   @NotNull CollisionContext con) {
-		switch(state.getValue(FACING)) {
-		case EAST:
-			return EAST;
-		case NORTH:
-			return NORTH;
-		case SOUTH:
-			return SOUTH;
-		case WEST:
-			return WEST;
-		default:
-			return NORTH;
-		
-		}
+		return switch (state.getValue(FACING)) {
+			case EAST -> EAST;
+			case NORTH -> NORTH;
+			case SOUTH -> SOUTH;
+			case WEST -> WEST;
+			default -> NORTH;
+		};
 	}
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext con) {

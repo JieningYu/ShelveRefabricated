@@ -18,6 +18,11 @@ public class WaterCageBlock extends WaterLoggableBlock{
 
 	@Override
 	public VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter get, @NotNull BlockPos pos, @NotNull CollisionContext con) {
+		return Shapes.box(0.01, 0.01, 0.01, 0.99, 0.99, 0.99);
+	}
+
+	@Override
+	public VoxelShape getCollisionShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
 		return SHAPE;
 	}
 
