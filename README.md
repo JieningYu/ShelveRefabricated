@@ -1,4 +1,4 @@
-[Shelve Refabricated](logo.jpg)
+<img src="logo.jpg" width="720" height="450"/>
 
 # Shelve Refabricated
 
