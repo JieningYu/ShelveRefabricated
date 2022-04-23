@@ -1,6 +1,6 @@
-# Shelve Refabricated
+[Shelve Refabricated](logo.jpg)
 
-****
+# Shelve Refabricated
 
 This is the repository for the Fabric port of Shelve by MattersSstream.
 
