@@ -29,6 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class FireCrackerBlock extends Block{
 	
@@ -37,23 +38,23 @@ public class FireCrackerBlock extends Block{
 	public static final BooleanProperty LIT = BooleanProperty.create("lit");
 	
 	@Override
-	public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_,
-			CollisionContext p_60558_) {
+	public VoxelShape getShape(@NotNull BlockState p_60555_, @NotNull BlockGetter p_60556_, @NotNull BlockPos p_60557_,
+							   @NotNull CollisionContext p_60558_) {
 		return AABB;
 	}
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader red, BlockPos pos) {
+	public boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader red, BlockPos pos) {
 		return canSupportCenter(red, pos.above(), Direction.DOWN);
 	}
 	@Override
-	public void entityInside(BlockState state, Level lev, BlockPos pos, Entity ent) {
+	public void entityInside(BlockState state, @NotNull Level lev, @NotNull BlockPos pos, @NotNull Entity ent) {
 		if(state.getValue(LIT)) {
 			ent.hurt(DamageSource.ON_FIRE, 1.0f);
 		}
 	}
 	@Override
-	public InteractionResult use(BlockState state, Level lev, BlockPos pos, Player pla,
-			InteractionHand han, BlockHitResult res) {
+	public InteractionResult use(@NotNull BlockState state, @NotNull Level lev, @NotNull BlockPos pos, Player pla,
+								 @NotNull InteractionHand han, @NotNull BlockHitResult res) {
 		if(pla.getItemInHand(han).getItem().equals(Items.FLINT_AND_STEEL)) {
 			if(!lev.isClientSide) {
 				light(lev, pos, state);
@@ -72,14 +73,14 @@ public class FireCrackerBlock extends Block{
 		lev.scheduleTick(pos, this, 10);
 	}
 	@Override
-	public void tick(BlockState state, ServerLevel lev, BlockPos pos, Random ran) {
+	public void tick(@NotNull BlockState state, ServerLevel lev, @NotNull BlockPos pos, @NotNull Random ran) {
 		lev.updateNeighborsAt(pos, this);
 		lev.explode(null, pos.getX(), pos.getY(), pos.getZ(), 1.0f, BlockInteraction.NONE);
 		lev.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 	}
 	@Override
-	public void neighborChanged(BlockState state, Level lev, BlockPos pos, Block blo,
-			BlockPos pos1, boolean bln) {
+	public void neighborChanged(@NotNull BlockState state, Level lev, BlockPos pos, @NotNull Block blo,
+								@NotNull BlockPos pos1, boolean bln) {
 		if(lev.getBlockState(pos.below()).getBlock().equals(BlockInit.FIRECRACKER) && !state.getValue(LIT)) {
 			if(lev.getBlockState(pos.below()).getValue(FireCrackerBlock.LIT) && !lev.isClientSide) {
 				light(lev, pos, state);
@@ -87,7 +88,7 @@ public class FireCrackerBlock extends Block{
 		}
 	}
 	@Override
-	public void animateTick(BlockState state, Level lev, BlockPos pos, Random ran) {
+	public void animateTick(BlockState state, @NotNull Level lev, @NotNull BlockPos pos, @NotNull Random ran) {
 		if(state.getValue(LIT)) {
 			double rx = pos.getX() + ran.nextDouble();
 			double ry = pos.getY() + ran.nextDouble();

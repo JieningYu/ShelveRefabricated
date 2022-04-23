@@ -27,6 +27,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class MilkCauldron extends Block{
 	
@@ -36,13 +37,13 @@ public class MilkCauldron extends Block{
 	protected static final VoxelShape SHAPE = Shapes.join(Shapes.block(), Shapes.or(box(0.0D, 0.0D, 4.0D, 16.0D, 3.0D, 12.0D), box(4.0D, 0.0D, 0.0D, 12.0D, 3.0D, 16.0D), box(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D), INSIDE), BooleanOp.ONLY_FIRST);
 	
 	@Override
-	public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_,
-			CollisionContext p_60558_) {
+	public VoxelShape getShape(@NotNull BlockState p_60555_, @NotNull BlockGetter p_60556_, @NotNull BlockPos p_60557_,
+                               @NotNull CollisionContext p_60558_) {
 		return SHAPE;
 	}
 	@Override
-	public InteractionResult use(BlockState state, Level lev, BlockPos pos, Player pla,
-			InteractionHand han, BlockHitResult res) {
+	public InteractionResult use(@NotNull BlockState state, Level lev, @NotNull BlockPos pos, @NotNull Player pla,
+                                 @NotNull InteractionHand han, @NotNull BlockHitResult res) {
 		ShrinkItemStack shr = new ShrinkItemStack();
 			if(!lev.isClientSide) {
 				switch(state.getValue(PROGRESS)) {
@@ -77,7 +78,7 @@ public class MilkCauldron extends Block{
 		}
 	}
 	@Override
-	public void randomTick(BlockState state, ServerLevel lev, BlockPos pos, Random ran) {
+	public void randomTick(BlockState state, @NotNull ServerLevel lev, @NotNull BlockPos pos, @NotNull Random ran) {
 		if(state.getValue(PROGRESS) == 2) {
 			lev.setBlockAndUpdate(pos, state.setValue(PROGRESS, 3));
 		}
@@ -91,11 +92,11 @@ public class MilkCauldron extends Block{
 		this.registerDefaultState(this.stateDefinition.any().setValue(PROGRESS, 1));
 	}
 	@Override
-	public boolean hasAnalogOutputSignal(BlockState p_60457_) {
+	public boolean hasAnalogOutputSignal(@NotNull BlockState p_60457_) {
 		return true;
 	}
 	@Override
-	public int getAnalogOutputSignal(BlockState state, Level lev, BlockPos pos) {
+	public int getAnalogOutputSignal(@NotNull BlockState state, @NotNull Level lev, @NotNull BlockPos pos) {
 		return 3;
 	}
 }

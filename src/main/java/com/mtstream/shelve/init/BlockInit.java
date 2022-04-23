@@ -14,6 +14,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 public class BlockInit {
+    // Temporarily removed trash cans
     public static final FireCrackerBlock FIRECRACKER = new FireCrackerBlock(FabricBlockSettings.of(Material.EXPLOSIVE).instabreak().dynamicShape().sound(SoundType.GRASS));
     public static final ChannelerBlock CHANNELER = new ChannelerBlock(FabricBlockSettings.copy(Blocks.COPPER_BLOCK).dynamicShape().sound(SoundType.COPPER).strength(3.0f).requiresCorrectToolForDrops());
     public static final WaterCageBlock WATER_CAGE = new WaterCageBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.COLOR_BLUE).dynamicShape().sound(SoundType.LANTERN).strength(2.8f).requiresCorrectToolForDrops());

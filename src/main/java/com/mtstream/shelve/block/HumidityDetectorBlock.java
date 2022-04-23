@@ -28,6 +28,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class HumidityDetectorBlock extends BaseEntityBlock{
 	
@@ -40,11 +41,11 @@ public class HumidityDetectorBlock extends BaseEntityBlock{
 	public static final VoxelShape AABB = Shapes.or(SPONGE, BASE, SPONGEBASE);
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter get, BlockPos pos,
-			CollisionContext con) {
+	public VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter get, @NotNull BlockPos pos,
+							   @NotNull CollisionContext con) {
 		return AABB;
 	}
-	public RenderShape getRenderShape(BlockState state) {
+	public RenderShape getRenderShape(@NotNull BlockState state) {
 	      return RenderShape.MODEL;
 	   }
 	public HumidityDetectorBlock(Properties properties) {
@@ -56,25 +57,25 @@ public class HumidityDetectorBlock extends BaseEntityBlock{
 		builder.add(POWER,WATER_DETECTING);
 	}
 	@Override
-	public boolean useShapeForLightOcclusion(BlockState p_60576_) {
+	public boolean useShapeForLightOcclusion(@NotNull BlockState p_60576_) {
 		return true;
 	}
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
 		return BlockEntityInit.HUMIDITY_DETECTOR.create(pos, state);
 	}
 	@Override
-	public int getSignal(BlockState state, BlockGetter getter, BlockPos pos, Direction dir) {
+	public int getSignal(BlockState state, @NotNull BlockGetter getter, @NotNull BlockPos pos, @NotNull Direction dir) {
 		return state.getValue(POWER);
 	}
 	@Override
-	public void neighborChanged(BlockState state, Level lev, BlockPos pos, Block blo,
-			BlockPos pos1, boolean bln) {
+	public void neighborChanged(@NotNull BlockState state, @NotNull Level lev, @NotNull BlockPos pos, @NotNull Block blo,
+								@NotNull BlockPos pos1, boolean bln) {
 		updateSignal(lev, pos, state);
 	}
 	@Override
-	public InteractionResult use(BlockState state, Level lev, BlockPos pos, Player pla,
-			InteractionHand han, BlockHitResult res) {
+	public InteractionResult use(@NotNull BlockState state, Level lev, @NotNull BlockPos pos, @NotNull Player pla,
+								 @NotNull InteractionHand han, @NotNull BlockHitResult res) {
 		if(!lev.isClientSide) {
 			BlockState state1 = state.cycle(WATER_DETECTING);
 			lev.setBlock(pos, state1, 4);
@@ -112,7 +113,7 @@ public class HumidityDetectorBlock extends BaseEntityBlock{
 	}
 	@Override
 	@Nullable
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level lev, BlockState state, BlockEntityType<T> type) { 
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level lev, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
 		return lev.isClientSide ? null : createTickerHelper(type, BlockEntityInit.HUMIDITY_DETECTOR, HumidityDetectorBlock::tickEntity);
 	}
 	public static void tickEntity(Level lev,BlockPos pos,BlockState state,HumidityDetectorBlockEntity entity) {
@@ -121,7 +122,7 @@ public class HumidityDetectorBlock extends BaseEntityBlock{
 		}
 	}
 	@Override
-	public boolean isSignalSource(BlockState state) {
+	public boolean isSignalSource(@NotNull BlockState state) {
 		return true;
 	}
 }

@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class HarvesterBlock extends Block{
 	
@@ -41,8 +42,8 @@ public class HarvesterBlock extends Block{
 	public static final VoxelShape WEST = Shapes.box(0.125, 0, 0, 1, 1, 1);
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter get, BlockPos pos,
-			CollisionContext con) {
+	public VoxelShape getShape(BlockState state, @NotNull BlockGetter get, @NotNull BlockPos pos,
+							   @NotNull CollisionContext con) {
 		switch(state.getValue(FACING)) {
 		case EAST:
 			return EAST;
@@ -78,8 +79,8 @@ public class HarvesterBlock extends Block{
 	      return state.rotate(mir.getRotation(state.getValue(FACING)));
 	}
 	@Override
-	public void neighborChanged(BlockState state, Level lev, BlockPos pos, Block blo,
-			BlockPos blopos, boolean bln) {
+	public void neighborChanged(BlockState state, @NotNull Level lev, @NotNull BlockPos pos, @NotNull Block blo,
+								@NotNull BlockPos blopos, boolean bln) {
 		if (state.getValue(POWERED) && !lev.hasNeighborSignal(pos)) {
 	         lev.setBlock(pos, state.setValue(POWERED,false), 2);
 			

@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import org.jetbrains.annotations.NotNull;
 
 public class ChannelerBlock extends Block{
 	
@@ -51,7 +52,7 @@ public class ChannelerBlock extends Block{
 		lev.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.WEATHER, 1.0f, 1.0f);
 	}
 	@Override
-	public void animateTick(BlockState state, Level lev, BlockPos pos, Random ran) {
+	public void animateTick(@NotNull BlockState state, @NotNull Level lev, @NotNull BlockPos pos, Random ran) {
 		if (ran.nextInt(1) == 0) {
 	         Direction direction = Direction.getRandom(ran);
 	         if (direction != Direction.UP) {
@@ -69,8 +70,8 @@ public class ChannelerBlock extends Block{
 	      }
 	}
 	@Override
-	public void neighborChanged(BlockState state, Level lev, BlockPos pos, Block blo,
-			BlockPos p_60513_, boolean p_60514_) {
+	public void neighborChanged(@NotNull BlockState state, Level lev, @NotNull BlockPos pos, @NotNull Block blo,
+								@NotNull BlockPos p_60513_, boolean p_60514_) {
 		if(!lev.isClientSide) {
 			BlockPos leftpos = pos.relative(state.getValue(FACING).getCounterClockWise(Axis.Y));
 			BlockPos rightpos = pos.relative(state.getValue(FACING).getClockWise(Axis.Y));

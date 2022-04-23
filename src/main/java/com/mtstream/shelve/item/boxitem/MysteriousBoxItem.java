@@ -24,6 +24,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import org.jetbrains.annotations.NotNull;
 
 public class MysteriousBoxItem extends Item{
 	
@@ -31,7 +32,7 @@ public class MysteriousBoxItem extends Item{
 	public MysteriousBoxItem(Properties properties) {
 		super(properties);
 	}
-	public InteractionResultHolder<ItemStack> use(Level lev,Player pla,InteractionHand han){
+	public InteractionResultHolder<ItemStack> use(Level lev, Player pla, @NotNull InteractionHand han){
 			Random random = new Random();
 			int randomEvent = random.nextInt(4);
 			ItemStack stack = pla.getItemInHand(han);

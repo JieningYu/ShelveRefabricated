@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import org.jetbrains.annotations.NotNull;
 
 public class WaterLoggableBlock extends Block implements SimpleWaterloggedBlock{
 	
@@ -30,8 +31,8 @@ public class WaterLoggableBlock extends Block implements SimpleWaterloggedBlock{
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 	@Override
-	public BlockState updateShape(BlockState state, Direction dir, BlockState dirstate, LevelAccessor lev,
-			BlockPos pos, BlockPos dirpos) {
+	public BlockState updateShape(BlockState state, @NotNull Direction dir, @NotNull BlockState dirstate, @NotNull LevelAccessor lev,
+                                  @NotNull BlockPos pos, @NotNull BlockPos dirpos) {
 		if (state.getValue(WATERLOGGED))
 			lev.scheduleTick(pos, Fluids.WATER,Fluids.WATER.getTickDelay(lev));
 		return state;
@@ -46,8 +47,8 @@ public class WaterLoggableBlock extends Block implements SimpleWaterloggedBlock{
 		bui.add(WATERLOGGED);
 	}
 	@Override
-	public boolean isPathfindable(BlockState state, BlockGetter blockg, BlockPos pos,
-			PathComputationType pathComputationType) {
+	public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter blockg, @NotNull BlockPos pos,
+                                  @NotNull PathComputationType pathComputationType) {
 		return false;
 	}
 }

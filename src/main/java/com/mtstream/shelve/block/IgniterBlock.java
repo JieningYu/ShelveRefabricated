@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import org.jetbrains.annotations.NotNull;
 
 public class IgniterBlock extends Block{
 	
@@ -40,12 +41,12 @@ public class IgniterBlock extends Block{
 				.setValue(FACING, con.getNearestLookingDirection().getOpposite());
 	}
 	@Override
-	public void tick(BlockState state, ServerLevel lev, BlockPos pos, Random ran) {
+	public void tick(@NotNull BlockState state, @NotNull ServerLevel lev, @NotNull BlockPos pos, @NotNull Random ran) {
 		
 	}
 	@SuppressWarnings("deprecation")
 	@Override
-	public void neighborChanged(BlockState state, Level lev, BlockPos pos, Block blo, BlockPos blopos, boolean bln) {
+	public void neighborChanged(BlockState state, Level lev, BlockPos pos, @NotNull Block blo, @NotNull BlockPos blopos, boolean bln) {
 		BlockPos frontpos = pos.relative(state.getValue(FACING));
 	      BlockState frontstate = lev.getBlockState(frontpos);
 		if (state.getValue(POWERED) && !lev.hasNeighborSignal(pos)) {
@@ -75,16 +76,14 @@ public class IgniterBlock extends Block{
 			if(frontstate.getBlock().equals(Blocks.CAMPFIRE)||frontstate.getBlock().equals(Blocks.SOUL_CAMPFIRE)) {
 				lev.setBlockAndUpdate(frontpos,frontstate.setValue(CampfireBlock.LIT, true));
 			}
-			} else {
-				
-		}
-		
-		
+			}
+
+
 		super.neighborChanged(state, lev, blopos, blo, blopos, bln);
 	}
 
 	@Override
-	public void animateTick(BlockState state, Level lev, BlockPos pos, Random ran) {
+	public void animateTick(@NotNull BlockState state, @NotNull Level lev, @NotNull BlockPos pos, @NotNull Random ran) {
 		
 	}
 	

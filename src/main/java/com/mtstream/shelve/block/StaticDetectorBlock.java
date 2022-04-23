@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class StaticDetectorBlock extends BaseEntityBlock{
 	
@@ -33,12 +34,11 @@ public class StaticDetectorBlock extends BaseEntityBlock{
 	public static final VoxelShape AABB = Shapes.or(BASE, ROD, TOP, ROD_BASE);
 	
 	@Override
-	public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_,
-			CollisionContext p_60558_) {
+	public VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
 		return AABB;
 	}
 	@Override
-	public RenderShape getRenderShape(BlockState p_49232_) {
+	public RenderShape getRenderShape(@NotNull BlockState state) {
 		return RenderShape.MODEL;
 	}
 
@@ -51,20 +51,20 @@ public class StaticDetectorBlock extends BaseEntityBlock{
 		builder.add(POWER);
 	}
 	@Override
-	public boolean useShapeForLightOcclusion(BlockState state) {
+	public boolean useShapeForLightOcclusion(@NotNull BlockState state) {
 		return true;
 	}
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
 		return BlockEntityInit.STATIC_DETECTOR.create(pos, state);
 	}
 	@Override
-	public int getSignal(BlockState state, BlockGetter get, BlockPos pos, Direction dir) {
+	public int getSignal(BlockState state, @NotNull BlockGetter get, @NotNull BlockPos pos, @NotNull Direction dir) {
 		return state.getValue(POWER);
 	}
 	@Override
-	public void neighborChanged(BlockState state, Level lev, BlockPos pos, Block blo,
-			BlockPos bpos, boolean bln) {
+	public void neighborChanged(@NotNull BlockState state, @NotNull Level lev, @NotNull BlockPos pos, @NotNull Block blo,
+								@NotNull BlockPos bpos, boolean bln) {
 		updateSignal(lev, pos, state);
 	}
 	public static void updateSignal(Level lev,BlockPos pos,BlockState state) {
@@ -76,7 +76,7 @@ public class StaticDetectorBlock extends BaseEntityBlock{
 	}
 	@Override
 	@Nullable
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level lev, BlockState state,BlockEntityType<T> type) {
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level lev, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
 		return lev.isClientSide ? null : createTickerHelper(type, BlockEntityInit.STATIC_DETECTOR, StaticDetectorBlock::tickEntity);
 	}
 	public static void tickEntity(Level lev,BlockPos pos,BlockState state,StaticDetectorBlockEntity entity) {
@@ -85,7 +85,7 @@ public class StaticDetectorBlock extends BaseEntityBlock{
 		}
 	}
 	@Override
-	public boolean isSignalSource(BlockState state) {
+	public boolean isSignalSource(@NotNull BlockState state) {
 		return true;
 	}
 }

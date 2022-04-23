@@ -21,17 +21,18 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 public class HandheldDispenserItem extends Item{
 	public HandheldDispenserItem(Properties properties) {
 		super(properties);
 	}
 	@Override
-	public UseAnim getUseAnimation(ItemStack p_41452_) {
+	public UseAnim getUseAnimation(@NotNull ItemStack p_41452_) {
 		return UseAnim.NONE;
 	}
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level lev, Player pla, InteractionHand han) {
+	public InteractionResultHolder<ItemStack> use(@NotNull Level lev, Player pla, @NotNull InteractionHand han) {
 		ItemStack stack = pla.getItemInHand(han);
 		ShrinkItemStack shr = new ShrinkItemStack();
 		if(getAnotherHand(han, pla).equals(Items.ARROW)||getAnotherHand(han, pla).equals(Items.SPECTRAL_ARROW)||getAnotherHand(han, pla).equals(Items.TIPPED_ARROW)){

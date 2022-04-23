@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -24,21 +25,20 @@ public class CrystalBallBlock extends Block {
 	public static final VoxelShape AABB = Shapes.or(BASE1, BASE2, BASE3, BALL);
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter get, BlockPos pos, CollisionContext con) {
+	public VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter get, @NotNull BlockPos pos, @NotNull CollisionContext con) {
 		return AABB;
 	}
 	@Override
-	public RenderShape getRenderShape(BlockState p_49232_) {
+	public RenderShape getRenderShape(@NotNull BlockState p_49232_) {
 		return RenderShape.MODEL;
 	}
-    /*
-	@Override
+
 	public float getEnchantmentPowerBonus(BlockState state, LevelReader level, BlockPos pos) {
 		return 5;
 	}
-     */
+
 	@Override
-	public void animateTick(BlockState state, Level lev, BlockPos pos, Random ran) {
+	public void animateTick(@NotNull BlockState state, @NotNull Level lev, @NotNull BlockPos pos, @NotNull Random ran) {
 		Direction direction = Direction.getRandom(ran);
 		double d0 = direction.getStepX() == 0 ? ran.nextDouble() : 0.5D + (double)direction.getStepX() * 0.6D;
         double d1 = direction.getStepY() == 0 ? ran.nextDouble() : 0.5D + (double)direction.getStepY() * 0.6D;

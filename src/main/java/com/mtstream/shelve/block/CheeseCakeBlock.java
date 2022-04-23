@@ -23,6 +23,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class CheeseCakeBlock extends Block{
 	
@@ -32,8 +33,8 @@ public class CheeseCakeBlock extends Block{
 		return Shapes.box(0.0625, 0, 0.0625, 0.9375, 0.375, 0.9375 - (0.125 * i));	
 	}
 	@Override
-	public InteractionResult use(BlockState state, Level lev, BlockPos pos, Player pla,
-			InteractionHand han, BlockHitResult res) {
+	public InteractionResult use(@NotNull BlockState state, @NotNull Level lev, @NotNull BlockPos pos, Player pla,
+                                 @NotNull InteractionHand han, @NotNull BlockHitResult res) {
 		if(!pla.canEat(false)) {
 			return InteractionResult.PASS;
 		}else {
@@ -56,15 +57,15 @@ public class CheeseCakeBlock extends Block{
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter get, BlockPos pos,
-			CollisionContext con) {
+	public VoxelShape getShape(BlockState state, @NotNull BlockGetter get, @NotNull BlockPos pos,
+                               @NotNull CollisionContext con) {
 		return shape(state.getValue(BITES));
 	}
-	public BlockState updateShape(BlockState state, Direction dir, BlockState state1, LevelAccessor lev, BlockPos pos, BlockPos pos1) {
+	public BlockState updateShape(@NotNull BlockState state, @NotNull Direction dir, @NotNull BlockState state1, @NotNull LevelAccessor lev, @NotNull BlockPos pos, @NotNull BlockPos pos1) {
 	    return dir == Direction.DOWN && !state.canSurvive(lev, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, dir, state1, lev, pos, pos1);
 	}
 
-	public boolean canSurvive(BlockState p_51209_, LevelReader p_51210_, BlockPos p_51211_) {
+	public boolean canSurvive(@NotNull BlockState p_51209_, LevelReader p_51210_, BlockPos p_51211_) {
 	    return p_51210_.getBlockState(p_51211_.below()).getMaterial().isSolid();
 	}
 	public CheeseCakeBlock(Properties prop) {

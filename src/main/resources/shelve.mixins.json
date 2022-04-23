@@ -4,6 +4,7 @@
   "package": "com.mtstream.shelve.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "EnchantmentTableBlockMixin",
     "ItemStackMixin"
   ],
   "client": [
