@@ -1,15 +1,12 @@
 package com.mtstream.shelve.block;
 
-
-import java.util.Random;
-
 import com.mtstream.shelve.init.ItemInit;
 import com.mtstream.shelve.item.ShrinkItemStack;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -46,23 +43,24 @@ public class MilkCauldron extends Block{
                                  @NotNull InteractionHand han, @NotNull BlockHitResult res) {
 		ShrinkItemStack shr = new ShrinkItemStack();
 			if(!lev.isClientSide) {
-				switch(state.getValue(PROGRESS)) {
-				case 1:
-					if(pla.getItemInHand(han).getItem().equals(Items.BUCKET)) {
+				switch (state.getValue(PROGRESS)) {
+					case 1 -> {
+						if (pla.getItemInHand(han).getItem().equals(Items.BUCKET)) {
+							lev.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
+							shr.ShrinkItem(pla, pla.getItemInHand(han));
+							lev.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
+							pla.addItem(new ItemStack(Items.MILK_BUCKET));
+						}
+						if (pla.getItemInHand(han).getItem().equals(Items.SUGAR)) {
+							lev.setBlockAndUpdate(pos, state.setValue(PROGRESS, 2));
+							shr.ShrinkItem(pla, pla.getItemInHand(han));
+							lev.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
+						}
+					}
+					case 3 -> {
 						lev.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
-						shr.ShrinkItem(pla, pla.getItemInHand(han));
-						lev.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
-						pla.addItem(new ItemStack(Items.MILK_BUCKET));					
+						Block.popResource(lev, pos, new ItemStack(ItemInit.CHEESE));
 					}
-					if(pla.getItemInHand(han).getItem().equals(Items.SUGAR)) {
-						lev.setBlockAndUpdate(pos, state.setValue(PROGRESS, 2));
-						shr.ShrinkItem(pla, pla.getItemInHand(han));
-						lev.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
-					}
-					break;
-				case 3:
-					lev.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
-					Block.popResource(lev, pos, new ItemStack(ItemInit.CHEESE));
 				}
 				return InteractionResult.CONSUME;
 			} else {
@@ -71,14 +69,11 @@ public class MilkCauldron extends Block{
 	}
 	@Override
 	public boolean isRandomlyTicking(BlockState state) {
-		if(state.getValue(PROGRESS)==2) {
-			return true;
-		} else {
-			return false;
-		}
+		return state.getValue(PROGRESS) == 2;
 	}
+
 	@Override
-	public void randomTick(BlockState state, @NotNull ServerLevel lev, @NotNull BlockPos pos, @NotNull Random ran) {
+	public void randomTick(BlockState state, @NotNull ServerLevel lev, @NotNull BlockPos pos, @NotNull RandomSource ran) {
 		if(state.getValue(PROGRESS) == 2) {
 			lev.setBlockAndUpdate(pos, state.setValue(PROGRESS, 3));
 		}

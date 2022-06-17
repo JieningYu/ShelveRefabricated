@@ -23,29 +23,32 @@ public class WaterLoggableBlock extends Block implements SimpleWaterloggedBlock{
     
 	public WaterLoggableBlock(Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED,Boolean.FALSE));
+		this.registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
 	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public FluidState getFluidState(BlockState state) {
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
+
 	@Override
-	public BlockState updateShape(BlockState state, @NotNull Direction dir, @NotNull BlockState dirstate, @NotNull LevelAccessor lev,
-                                  @NotNull BlockPos pos, @NotNull BlockPos dirpos) {
-		if (state.getValue(WATERLOGGED))
-			lev.scheduleTick(pos, Fluids.WATER,Fluids.WATER.getTickDelay(lev));
+	public BlockState updateShape(BlockState state, @NotNull Direction dir, @NotNull BlockState dirstate, @NotNull LevelAccessor lev, @NotNull BlockPos pos, @NotNull BlockPos dirpos) {
+		if (state.getValue(WATERLOGGED)) lev.scheduleTick(pos, Fluids.WATER,Fluids.WATER.getTickDelay(lev));
 		return state;
 	}
+
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState flate = context.getLevel().getFluidState(context.getClickedPos());
 		return this.defaultBlockState().setValue(WATERLOGGED, flate.is(FluidTags.WATER));
 	}
+
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> bui) {
 		bui.add(WATERLOGGED);
 	}
+
 	@Override
 	public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter blockg, @NotNull BlockPos pos,
                                   @NotNull PathComputationType pathComputationType) {

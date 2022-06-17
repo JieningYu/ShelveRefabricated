@@ -7,9 +7,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class StaticDetectorBlockEntity extends BlockEntity{
-
 	public StaticDetectorBlockEntity(BlockPos pos, BlockState state) {
 		super(BlockEntityInit.STATIC_DETECTOR, pos, state);
 	}
-
 }

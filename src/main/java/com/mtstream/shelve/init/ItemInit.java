@@ -18,7 +18,7 @@ public class ItemInit {
     public static final Item MARINIDE_INGOT = new Item(new FabricItemSettings().group(CreativeModeTab.TAB_MISC));
     public static final HandheldDispenserItem HANDHELD_DISPENSER = new HandheldDispenserItem(new FabricItemSettings().group(CreativeModeTab.TAB_TOOLS).stacksTo(1));
     public static final Item AMETHYST_BALL = new Item(new FabricItemSettings().group(CreativeModeTab.TAB_MISC));
-    public static final TransmutationMagnetItem TRANSMUTATION_MAGNET = new TransmutationMagnetItem(new FabricItemSettings().group(CreativeModeTab.TAB_TOOLS).stacksTo(1));
+    // public static final TransmutationMagnetItem TRANSMUTATION_MAGNET = new TransmutationMagnetItem(new FabricItemSettings().group(CreativeModeTab.TAB_TOOLS).stacksTo(1));
     public static final Item EMPTY_BOX = new Item(new FabricItemSettings());
     public static final MysteriousBoxItem MYSTERIOUS_BOX = new MysteriousBoxItem(new FabricItemSettings());
     public static final InfernalBoxItem INFERNAL_BOX = new InfernalBoxItem(new FabricItemSettings());
@@ -30,7 +30,7 @@ public class ItemInit {
         Registry.register(Registry.ITEM, new ResourceLocation(Shelve.MOD_ID, "marinide_ingot"), MARINIDE_INGOT);
         Registry.register(Registry.ITEM, new ResourceLocation(Shelve.MOD_ID, "handheld_dispenser"), HANDHELD_DISPENSER);
         Registry.register(Registry.ITEM, new ResourceLocation(Shelve.MOD_ID, "amethyst_ball"), AMETHYST_BALL);
-        Registry.register(Registry.ITEM, new ResourceLocation(Shelve.MOD_ID, "transmutation_magnet"), TRANSMUTATION_MAGNET);
+        // Registry.register(Registry.ITEM, new ResourceLocation(Shelve.MOD_ID, "transmutation_magnet"), TRANSMUTATION_MAGNET);
         Registry.register(Registry.ITEM, new ResourceLocation(Shelve.MOD_ID, "empty_box"), EMPTY_BOX);
         Registry.register(Registry.ITEM, new ResourceLocation(Shelve.MOD_ID, "mysterious_box"), MYSTERIOUS_BOX);
         Registry.register(Registry.ITEM, new ResourceLocation(Shelve.MOD_ID, "infernal_box"), INFERNAL_BOX);

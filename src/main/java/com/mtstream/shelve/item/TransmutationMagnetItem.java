@@ -14,10 +14,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TransmutationMagnetItem extends Item{
-
 	public TransmutationMagnetItem(Properties properties) {
 		super(properties);
 	}
+
 	@Override
 	public InteractionResult useOn(UseOnContext con) {
 		BlockPos pos = con.getClickedPos();

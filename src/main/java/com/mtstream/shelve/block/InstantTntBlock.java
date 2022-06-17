@@ -37,9 +37,7 @@ public class InstantTntBlock extends TntBlock{
 			Item item = itemStack.getItem();
 			if (!player.isCreative()) {
 				if (itemStack.is(Items.FLINT_AND_STEEL)) {
-					itemStack.hurtAndBreak(1, player, (playerx) -> {
-						playerx.broadcastBreakEvent(hand);
-					});
+					itemStack.hurtAndBreak(1, player, (playerx) -> playerx.broadcastBreakEvent(hand));
 				} else {
 					itemStack.shrink(1);
 				}

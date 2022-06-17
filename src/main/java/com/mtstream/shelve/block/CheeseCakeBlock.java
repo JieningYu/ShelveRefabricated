@@ -2,10 +2,8 @@ package com.mtstream.shelve.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +27,7 @@ public class CheeseCakeBlock extends Block{
 	
 	public static final IntegerProperty BITES = BlockStateProperties.BITES;
 	
-	public static final VoxelShape shape(int i) {
+	public static VoxelShape shape(int i) {
 		return Shapes.box(0.0625, 0, 0.0625, 0.9375, 0.375, 0.9375 - (0.125 * i));	
 	}
 	@Override

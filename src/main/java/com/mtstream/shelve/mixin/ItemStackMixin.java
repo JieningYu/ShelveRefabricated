@@ -44,7 +44,7 @@ public class ItemStackMixin {
                 Block.popResourceFromFace(lev, pos, Direction.UP, new ItemStack(ItemInit.TURF));
                 lev.setBlockAndUpdate(pos, Blocks.DIRT.defaultBlockState());
                 lev.playSound(null, pos, SoundEvents.GRASS_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
-                stack.hurtAndBreak(1, pla, (c) -> {c.broadcastBreakEvent(han);});
+                stack.hurtAndBreak(1, pla, (c) -> c.broadcastBreakEvent(han));
                 cir.setReturnValue(InteractionResult.SUCCESS);
             }
         }
@@ -53,7 +53,7 @@ public class ItemStackMixin {
                 Block.popResourceFromFace(lev, pos, Direction.UP, new ItemStack(Items.GUNPOWDER));
                 lev.setBlockAndUpdate(pos, BlockInit.INSTANT_TNT.defaultBlockState());
                 lev.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0f, 1.0f);
-                stack.hurtAndBreak(1, pla, (c) -> {c.broadcastBreakEvent(han);});
+                stack.hurtAndBreak(1, pla, (c) -> c.broadcastBreakEvent(han));
                 cir.setReturnValue(InteractionResult.SUCCESS);
             }
         }

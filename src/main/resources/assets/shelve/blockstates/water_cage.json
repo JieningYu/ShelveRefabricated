@@ -1,6 +1,9 @@
 {
-	"variants":{
-		"":{
+	"variants": {
+		"powered=false": {
+			"model":"shelve:block/water_cage"
+		},
+		"powered=true": {
 			"model":"shelve:block/water_cage"
 		}
 	}

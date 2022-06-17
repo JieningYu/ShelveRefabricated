@@ -88,7 +88,7 @@ public class HumidityDetectorBlock extends BaseEntityBlock{
 	}
 	public static void updateSignal(Level lev,BlockPos pos,BlockState state) {
 		int signal = 0;
-		if(state.getValue(WATER_DETECTING) == true) {
+		if(state.getValue(WATER_DETECTING)) {
 			int water = detectwater(lev, pos);
 			if(water > 0) {
 				signal = 3 + (water * 2);

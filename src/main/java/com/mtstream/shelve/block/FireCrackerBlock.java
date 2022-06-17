@@ -1,15 +1,13 @@
 package com.mtstream.shelve.block;
 
-import java.util.Random;
-
 import com.mtstream.shelve.init.BlockInit;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -59,7 +57,7 @@ public class FireCrackerBlock extends Block{
 			if(!lev.isClientSide) {
 				light(lev, pos, state);
 				lev.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
-				pla.getItemInHand(han).hurtAndBreak(1, pla, (c) -> {c.broadcastBreakEvent(han);});
+				pla.getItemInHand(han).hurtAndBreak(1, pla, (c) -> c.broadcastBreakEvent(han));
 				return InteractionResult.CONSUME;
 			}else {
 				return InteractionResult.SUCCESS;
@@ -72,12 +70,14 @@ public class FireCrackerBlock extends Block{
 		lev.setBlockAndUpdate(pos, state.setValue(LIT, true));
 		lev.scheduleTick(pos, this, 10);
 	}
+
 	@Override
-	public void tick(@NotNull BlockState state, ServerLevel lev, @NotNull BlockPos pos, @NotNull Random ran) {
+	public void tick(@NotNull BlockState state, ServerLevel lev, @NotNull BlockPos pos, @NotNull RandomSource ran) {
 		lev.updateNeighborsAt(pos, this);
 		lev.explode(null, pos.getX(), pos.getY(), pos.getZ(), 1.0f, BlockInteraction.NONE);
 		lev.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 	}
+
 	@Override
 	public void neighborChanged(@NotNull BlockState state, Level lev, BlockPos pos, @NotNull Block blo,
 								@NotNull BlockPos pos1, boolean bln) {
@@ -88,7 +88,7 @@ public class FireCrackerBlock extends Block{
 		}
 	}
 	@Override
-	public void animateTick(BlockState state, @NotNull Level lev, @NotNull BlockPos pos, @NotNull Random ran) {
+	public void animateTick(BlockState state, @NotNull Level lev, @NotNull BlockPos pos, @NotNull RandomSource ran) {
 		if(state.getValue(LIT)) {
 			double rx = pos.getX() + ran.nextDouble();
 			double ry = pos.getY() + ran.nextDouble();

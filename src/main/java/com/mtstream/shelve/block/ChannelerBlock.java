@@ -1,13 +1,12 @@
 package com.mtstream.shelve.block;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -30,7 +29,7 @@ public class ChannelerBlock extends Block{
 	
 	public ChannelerBlock(Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(ENABLED, Boolean.valueOf(false)));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(ENABLED, Boolean.FALSE));
 	}
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
@@ -51,24 +50,26 @@ public class ChannelerBlock extends Block{
 		lev.addFreshEntity(lig);
 		lev.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.WEATHER, 1.0f, 1.0f);
 	}
+
 	@Override
-	public void animateTick(@NotNull BlockState state, @NotNull Level lev, @NotNull BlockPos pos, Random ran) {
-		if (ran.nextInt(1) == 0) {
-	         Direction direction = Direction.getRandom(ran);
-	         if (direction != Direction.UP) {
-	            BlockPos blockpos = pos.relative(direction);
-	            BlockState blockstate = lev.getBlockState(blockpos);
-	            if (!state.canOcclude() || !blockstate.isFaceSturdy(lev, blockpos, direction.getOpposite())) {
-	               double d0 = direction.getStepX() == 0 ? ran.nextDouble() : 0.5D + (double)direction.getStepX() * 0.6D;
-	               double d1 = direction.getStepY() == 0 ? ran.nextDouble() : 0.5D + (double)direction.getStepY() * 0.6D;
-	               double d2 = direction.getStepZ() == 0 ? ran.nextDouble() : 0.5D + (double)direction.getStepZ() * 0.6D;
-	               if(state.getValue(ENABLED)) {
-	            	   lev.addParticle(ParticleTypes.ELECTRIC_SPARK, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, 0.0D, 0.0D, 0.0D);
-	               }
-	            }
-	         }
-	      }
+	public void animateTick(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, RandomSource randomSource) {
+		if (randomSource.nextInt(1) == 0) {
+			Direction direction = Direction.getRandom(randomSource);
+			if (direction != Direction.UP) {
+				BlockPos blockpos = blockPos.relative(direction);
+				BlockState blockstate = level.getBlockState(blockpos);
+				if (!blockstate.canOcclude() || !blockstate.isFaceSturdy(level, blockpos, direction.getOpposite())) {
+					double d0 = direction.getStepX() == 0 ? randomSource.nextDouble() : 0.5D + (double)direction.getStepX() * 0.6D;
+					double d1 = direction.getStepY() == 0 ? randomSource.nextDouble() : 0.5D + (double)direction.getStepY() * 0.6D;
+					double d2 = direction.getStepZ() == 0 ? randomSource.nextDouble() : 0.5D + (double)direction.getStepZ() * 0.6D;
+					if(blockState.getValue(ENABLED)) {
+						level.addParticle(ParticleTypes.ELECTRIC_SPARK, (double)blockpos.getX() + d0, (double)blockpos.getY() + d1, (double)blockpos.getZ() + d2, 0.0D, 0.0D, 0.0D);
+					}
+				}
+			}
+		}
 	}
+
 	@Override
 	public void neighborChanged(@NotNull BlockState state, Level lev, @NotNull BlockPos pos, @NotNull Block blo,
 								@NotNull BlockPos p_60513_, boolean p_60514_) {
